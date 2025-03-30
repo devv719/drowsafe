@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drowsiness Monitoring Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background: #f8f8f8;
+        }
+        
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: black;
+            padding: 15px 50px;
+            color: white;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .home-button a {
+            padding: 8px 15px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        /* Dashboard Section */
+        .dashboard {
+            padding: 40px;
+        }
+        .dashboard h1 {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .dashboard .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            flex: 1;
+            margin: 0 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            min-width: 200px;
+        }
+        
+        /* Graph Section */
+        .graph-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Dropdown */
+        .dropdown {
+            margin: 20px 0;
+        }
+        .dropdown select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Drowsiness Dashboard</div>
+        <div class="home-button">
+            <button onclick="window.location.href=`{{ url_for('home') }}`">HOME</button>
+        </div>
+    </nav>
+    
+    <section class="dashboard">
+        <h1>Drowsiness Monitoring Dashboard</h1>
+        
+        <div class="dropdown">
+            <label for="driver-select">Select Driver:</label>
+            <select id="driver-select" onchange="updateGraph()">
+                <option value="john">John Doe</option>
+                <option value="jane">Jane Smith</option>
+                <option value="mike">Mike Johnson</option>
+            </select>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <h2>Total Events</h2>
+                <p id="total-events">0</p>
+            </div>
+            <div class="stat-card">
+                <h2>High Risk Events</h2>
+                <p id="high-risk-events">0</p>
+            </div>
+            <div class="stat-card">
+                <h2>Average Drowsiness Level</h2>
+                <p id="avg-level">0%</p>
+            </div>
+        </div>
+        
+        <div class="graph-container">
+            <canvas id="drowsinessChart"></canvas>
+        </div>
+    </section>
+    
+    <script>
+        const ctx = document.getElementById('drowsinessChart').getContext('2d');
+        const drowsinessChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                datasets: [{
+                    label: 'Drowsiness Level',
+                    data: [30, 50, 40, 60, 70, 90, 80],
+                    borderColor: 'black',
+                    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        
+        function updateGraph() {
+            const driverData = {
+                john: [20, 40, 30, 50, 60, 70, 90],
+                jane: [10, 30, 20, 40, 50, 60, 80],
+                mike: [15, 35, 25, 45, 55, 65, 85]
+            };
+            
+            const selectedDriver = document.getElementById('driver-select').value;
+            drowsinessChart.data.datasets[0].data = driverData[selectedDriver];
+            drowsinessChart.update();
+        }
+        
+        // Example Data Update
+        document.getElementById('total-events').innerText = 50;
+        document.getElementById('high-risk-events').innerText = 10;
+        document.getElementById('avg-level').innerText = '55%';
+    </script>
+</body>
+</html>
