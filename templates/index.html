@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Drowsiness Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">DriveSafe</div>
+        <ul class="nav-links">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Detection</a></li>
+            <li><a href="#">Drivers</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Driver Drowsiness Detection System</h1>
+        <p>Enhance driver safety with real-time drowsiness detection and comprehensive monitoring.</p>
+        <div class="buttons">
+            <button class="btn btn-black" onclick="startDetection()">Try Demo</button>
+            <button class="btn btn-white">View Dashboard</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature-card">
+            <h3>Real-time Detection</h3>
+            <p>Monitor driver alertness in real-time using advanced computer vision.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Driver Analytics</h3>
+            <p>Track and analyze driver performance with comprehensive analytics.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Alert System</h3>
+            <p>Immediate notifications when drowsiness is detected.</p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="how-it-works-container">
+            <!-- For Drivers -->
+            <div class="how-card">
+                <h3>For Drivers</h3>
+                <ul>
+                    <li><span class="number">1</span> Start the detection system before beginning your shift</li>
+                    <li><span class="number">2</span> Receive audio alerts if signs of drowsiness are detected</li>
+                    <li><span class="number">3</span> Take recommended breaks when the system suggests</li>
+                </ul>
+            </div>
+            <!-- For Management -->
+            <div class="how-card">
+                <h3>For Management</h3>
+                <ul>
+                    <li><span class="number">1</span> Monitor all drivers through the central dashboard</li>
+                    <li><span class="number">2</span> Receive notifications for repeated drowsiness events</li>
+                    <li><span class="number">3</span> Access detailed reports and analytics on driver alertness</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 DriveSafe. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
